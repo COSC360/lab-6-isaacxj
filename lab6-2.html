@@ -11,6 +11,18 @@
   <p id="time_two"></p>
 
   <!-- Add button and table here -->
+  <button id="cityInfo">Get City Info</button>
+
+  <table id="table">
+    <thead>
+      <th>Name</th>
+      <th>iso</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>population</th>
+      <th>elevation</th>
+    </thead>
+  </table>
 
   <script>
   //set interval timers to trigger the refresh.  Here the callback function will
@@ -45,6 +57,15 @@
 
 
   }
+
+  $("#cityInfo").click(function(){
+    $.get("http://www.randyconnolly.com/funwebdev/services/travel/cities.php", function(e){
+      $.each(e, function(i, field){
+        var newNode = '<tr><td>'+field.name+'<\/td><td>' + field.iso + '<\/td><td>' + field.latitude + '<\/td><td>' + field.longitude + '<\/td><td>' + field.population + '<\/td><td>' + field.elevation + '<\/td><\/tr>';
+        $("#table").append(newNode);
+      });
+    });
+});
   </script>
 
   </body>
